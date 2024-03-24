@@ -1,8 +1,26 @@
-class InputModel {
+import 'package:equatable/equatable.dart';
+
+class InputModel extends Equatable {
+  final String firstNoSign;
   final String first;
   final String operator;
   final String second;
 
-  InputModel(
-      {required this.first, required this.operator, required this.second});
+  const InputModel(
+      {this.firstNoSign = "",
+      this.first = "",
+      this.operator = "",
+      this.second = ""});
+
+  InputModel copyWith(
+      {String? firstNoSign, String? first, String? operator, String? second}) {
+    return InputModel(
+        firstNoSign: firstNoSign ?? this.firstNoSign,
+        first: first ?? this.first,
+        operator: operator ?? this.operator,
+        second: second ?? this.second);
+  }
+
+  @override
+  List<Object> get props => [firstNoSign, first, operator, second];
 }
