@@ -19,3 +19,8 @@ class InputOperatorEvent extends InputCalculatorEvent {
   @override
   List<Object> get props => [op];
 }
+
+class CalculateEvent extends InputCalculatorEvent {
+  @override
+  List<Object> get props => [];
+}

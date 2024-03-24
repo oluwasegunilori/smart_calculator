@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_calculator/domain/model/input_model.dart';
-import 'package:smart_calculator/domain/validate_input_usecase.dart';
+import 'package:smart_calculator/domain/usecase/validate_input_usecase.dart';
 
 void main() {
   group('Test validation, good input, bad input', () {

@@ -1,6 +1,6 @@
 import 'package:smart_calculator/domain/model/input_model.dart';
 
-import '../core/utils/operator_utils.dart';
+import '../../core/utils/operator_utils.dart';
 
 class ValidateInputUseCase {
   bool call(InputModel params) {
