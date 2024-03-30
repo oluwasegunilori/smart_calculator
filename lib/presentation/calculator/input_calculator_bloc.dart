@@ -2,8 +2,6 @@ import 'dart:developer' as developer;
 
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:smart_calculator/domain/model/input_model.dart';
-
 import 'input_calculator_event.dart';
 import 'input_calculator_state.dart';
 
