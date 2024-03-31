@@ -1,15 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:smart_calculator/domain/model/input_model.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:smart_calculator/domain/usecase/calculate_answer_usecase.dart';
 import 'package:smart_calculator/presentation/calculator/input_calculator_bloc.dart';
 import 'package:smart_calculator/presentation/calculator/input_calculator_event.dart';
 import 'package:smart_calculator/presentation/calculator/input_calculator_state.dart';
 
+import 'input_calculator_bloc_test.mocks.dart';
+
+@GenerateMocks([CalculateAnswerUseCase])
 void main() {
+  final mockCalculateAnswerUseCase = MockCalculateAnswerUseCase();
+  InputCalculatorBloc inputBloc =
+      InputCalculatorBloc(mockCalculateAnswerUseCase);
+
   group('Test state changes', () {
-    InputCalculatorBloc inputBloc = InputCalculatorBloc();
     setUp(() {
-      inputBloc = InputCalculatorBloc();
+      inputBloc = InputCalculatorBloc(mockCalculateAnswerUseCase);
     });
 
     tearDown(() {
@@ -22,7 +31,7 @@ void main() {
 
     blocTest(
       'should emit firstinputstate when input event is called on initial state',
-      build: () => inputBloc = InputCalculatorBloc(),
+      build: () => inputBloc,
       act: (bloc) => bloc.add(InputNumberEvent("2")),
       expect: () => [FirstNumberState(const InputModel(first: "2"))],
     );
@@ -85,6 +94,39 @@ void main() {
             const InputModel(first: "2", operator: "*", second: "2")),
         SecondNumberState(
             const InputModel(first: "2", operator: "*", second: "22"))
+      ],
+    );
+
+    blocTest(
+      'should emit answer when answer event is called',
+      build: () {
+        when(mockCalculateAnswerUseCase.call(any)).thenReturn("21");
+        return inputBloc;
+      },
+      act: (bloc) {
+        bloc.emit(
+            FirstNumberState(const InputModel(first: "2", operator: "*")));
+        bloc.add(CalculateEvent());
+      },
+      expect: () => [
+        FirstNumberState(const InputModel(first: "2", operator: "*")),
+        AnswerState("21", const InputModel(first: "2", operator: "*"))
+      ],
+    );
+
+    blocTest(
+      'should not emit answer when answer event is called and answer is null',
+      build: () {
+        when(mockCalculateAnswerUseCase.call(any)).thenReturn("");
+        return inputBloc;
+      },
+      act: (bloc) {
+        bloc.emit(
+            FirstNumberState(const InputModel(first: "2", operator: "*")));
+        bloc.add(CalculateEvent());
+      },
+      expect: () => [
+        FirstNumberState(const InputModel(first: "2", operator: "*")),
       ],
     );
   });

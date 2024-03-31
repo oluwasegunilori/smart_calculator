@@ -38,7 +38,9 @@ class InputCalculatorBloc
 
     on<CalculateEvent>((event, emit) {
       var result = calculateAnswerUseCase.call(state.data);
-      emit(AnswerState(result ?? "", state.data));
+      if (result != null && result.isNotEmpty) {
+        emit(AnswerState(result, state.data));
+      }
     });
   }
 }
