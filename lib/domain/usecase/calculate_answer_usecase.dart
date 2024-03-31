@@ -25,7 +25,12 @@ class CalculateAnswerUseCase {
     if (data.firstNoSign == "-") {
       firstNumber = 0 - firstNumber;
     }
-    num answer = (firstNumber / secondNumber);
+    num answer = 0;
+    switch (data.operator) {
+      case "/":
+        answer = (firstNumber / secondNumber);
+        break;
+    }
     if (_isDecimal(answer)) {
       return answer.toString();
     } else {

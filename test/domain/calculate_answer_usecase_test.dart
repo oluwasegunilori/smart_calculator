@@ -43,16 +43,18 @@ void main() {
       expect("4", result);
     });
 
-    test("should return correct decimal answer when answer is division", () {
+    test("should return correct decimal answer when operation is division", () {
       var result = testSubject.call(const InputModel(
           firstNoSign: "-", first: "4", second: "8", operator: "/"));
       expect("-0.5", result);
     });
 
-    test("should return correct  answer when answer is division", () {
+    test("should return correct  answer when operation is division", () {
       var result = testSubject.call(const InputModel(
           firstNoSign: "-", first: "0", second: "8", operator: "/"));
       expect("0", result);
     });
+
+    
   });
 }
