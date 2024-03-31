@@ -55,6 +55,10 @@ void main() {
       expect("0", result);
     });
 
-    
+    test("should return correct  answer when operation is subtraction", () {
+      var result = testSubject.call(const InputModel(
+          firstNoSign: "-", first: "0", second: "-8", operator: "-"));
+      expect("8", result);
+    });
   });
 }
