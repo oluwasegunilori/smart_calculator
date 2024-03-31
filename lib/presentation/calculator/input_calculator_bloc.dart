@@ -2,12 +2,15 @@ import 'dart:developer' as developer;
 
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
+import 'package:smart_calculator/domain/usecase/calculate_answer_usecase.dart';
 import 'input_calculator_event.dart';
 import 'input_calculator_state.dart';
 
 class InputCalculatorBloc
     extends Bloc<InputCalculatorEvent, InputCalculatorState> {
-  InputCalculatorBloc(InputCalculatorState initialState)
+  final CalculateAnswerUseCase calculateAnswerUseCase;
+
+  InputCalculatorBloc(this.calculateAnswerUseCase)
       : super(InitialState.clean()) {
     on<InputNumberEvent>((event, emit) {
       if (state is InitialState) {
@@ -31,6 +34,11 @@ class InputCalculatorBloc
       } else if (state is FirstNumberState) {
         emit(FirstNumberState(state.data.copyWith(operator: event.op)));
       }
+    });
+
+    on<CalculateEvent>((event, emit) {
+      var result = calculateAnswerUseCase.call(state.data);
+      emit(AnswerState(result ?? "", state.data));
     });
   }
 }

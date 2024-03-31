@@ -7,9 +7,9 @@ import 'package:smart_calculator/presentation/calculator/input_calculator_state.
 
 void main() {
   group('Test state changes', () {
-    InputCalculatorBloc inputBloc = InputCalculatorBloc(InitialState.clean());
+    InputCalculatorBloc inputBloc = InputCalculatorBloc();
     setUp(() {
-      inputBloc = InputCalculatorBloc(InitialState.clean());
+      inputBloc = InputCalculatorBloc();
     });
 
     tearDown(() {
@@ -22,7 +22,7 @@ void main() {
 
     blocTest(
       'should emit firstinputstate when input event is called on initial state',
-      build: () => inputBloc = InputCalculatorBloc(InitialState.clean()),
+      build: () => inputBloc = InputCalculatorBloc(),
       act: (bloc) => bloc.add(InputNumberEvent("2")),
       expect: () => [FirstNumberState(const InputModel(first: "2"))],
     );
