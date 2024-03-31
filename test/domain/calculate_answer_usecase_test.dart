@@ -65,5 +65,11 @@ void main() {
           firstNoSign: "-", first: "10", second: "-8", operator: "+"));
       expect("-18", result);
     });
+
+    test("should return correct  answer when operation is multiplication", () {
+      var result = testSubject.call(const InputModel(
+          firstNoSign: "-", first: "10", second: "-8", operator: "*"));
+      expect("80", result);
+    });
   });
 }

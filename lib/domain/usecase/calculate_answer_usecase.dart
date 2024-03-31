@@ -36,6 +36,8 @@ class CalculateAnswerUseCase {
       case "+":
         answer = (firstNumber + secondNumber);
         break;
+      case "*":
+        answer = (firstNumber * secondNumber);
     }
     if (_isDecimal(answer)) {
       return answer.toString();
