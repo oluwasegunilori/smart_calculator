@@ -9,6 +9,7 @@ import 'input_calculator_state.dart';
 class InputCalculatorBloc
     extends Bloc<InputCalculatorEvent, InputCalculatorState> {
   final CalculateAnswerUseCase calculateAnswerUseCase;
+  List<String> s = [];
 
   InputCalculatorBloc(this.calculateAnswerUseCase)
       : super(InitialState.clean()) {
@@ -39,6 +40,7 @@ class InputCalculatorBloc
     on<CalculateEvent>((event, emit) {
       var result = calculateAnswerUseCase.call(state.data);
       if (result != null && result.isNotEmpty) {
+        s.add("${state.data}\n$result");
         emit(AnswerState(result, state.data));
       }
     });
@@ -46,5 +48,8 @@ class InputCalculatorBloc
     on<ClearScreenEvent>((event, emit) {
       emit(InitialState.clean());
     });
+  }
+  List<String> pastCalcs() {
+    return s;
   }
 }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:smart_calculator/domain/model/input_model.dart';
 
 sealed class InputCalculatorState extends Equatable {
-  InputModel data = InputModel();
+  final data = const InputModel();
 }
 
 class InitialState extends InputCalculatorState {

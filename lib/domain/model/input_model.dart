@@ -22,5 +22,10 @@ class InputModel extends Equatable {
   }
 
   @override
+  String toString() {
+    return "$firstNoSign$first $operator $second";
+  }
+
+  @override
   List<Object> get props => [firstNoSign, first, operator, second];
 }
