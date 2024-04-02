@@ -24,3 +24,8 @@ class CalculateEvent extends InputCalculatorEvent {
   @override
   List<Object> get props => [];
 }
+
+class ClearScreenEvent extends InputCalculatorEvent {
+  @override
+  List<Object?> get props => [];
+}

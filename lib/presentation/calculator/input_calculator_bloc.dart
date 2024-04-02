@@ -42,5 +42,9 @@ class InputCalculatorBloc
         emit(AnswerState(result, state.data));
       }
     });
+
+    on<ClearScreenEvent>((event, emit) {
+      emit(InitialState.clean());
+    });
   }
 }

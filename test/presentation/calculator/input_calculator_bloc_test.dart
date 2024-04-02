@@ -129,5 +129,21 @@ void main() {
         FirstNumberState(const InputModel(first: "2", operator: "*")),
       ],
     );
+
+    blocTest(
+      'should clear state to initial state when ClearEvent is called',
+      build: () {
+        return inputBloc;
+      },
+      act: (bloc) {
+        bloc.emit(
+            FirstNumberState(const InputModel(first: "2", operator: "*")));
+        bloc.add(ClearScreenEvent());
+      },
+      expect: () => [
+        FirstNumberState(const InputModel(first: "2", operator: "*")),
+        InitialState(const InputModel()),
+      ],
+    );
   });
 }
