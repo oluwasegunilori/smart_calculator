@@ -5,8 +5,8 @@ import 'package:smart_calculator/presentation/ui/calculator_screen_screen.dart';
 import 'package:smart_calculator/core/injection_container.dart' as di;
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const CalculatorScreen(),
+        home: CalculatorScreen(),
       ),
     );
   }

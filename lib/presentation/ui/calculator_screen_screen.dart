@@ -8,14 +8,9 @@ import 'package:smart_calculator/presentation/ui/ui_values.dart';
 
 import '../calculator/input_calculator_state.dart';
 
-class CalculatorScreen extends StatefulWidget {
+class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen({super.key});
 
-  @override
-  State<CalculatorScreen> createState() => _CalculatorScreenState();
-}
-
-class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,33 +30,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 child: Container(
                   alignment: Alignment.bottomRight,
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: BlocBuilder<InputCalculatorBloc, InputCalculatorState>(
-                    builder: (context, state) {
-                      if (state is AnswerState) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "${state.data.firstNoSign}${state.data.first} ${state.data.operator} ${state.data.second}",
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Text(
-                              state.answer,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ],
-                        );
-                      } else {
-                        return Text(
-                          "${state.data.firstNoSign}${state.data.first} ${state.data.operator} ${state.data.second}",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        );
-                      }
-                    },
-                  ),
+                  child: inputScreen(),
                 ),
               ),
               Expanded(
@@ -106,6 +75,36 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  BlocBuilder<InputCalculatorBloc, InputCalculatorState> inputScreen() {
+    return BlocBuilder<InputCalculatorBloc, InputCalculatorState>(
+      builder: (context, state) {
+        if (state is AnswerState) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                "${state.data.firstNoSign}${state.data.first} ${state.data.operator} ${state.data.second}",
+                // style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(
+                height: 6,
+              ),
+              Text(
+                state.answer,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ],
+          );
+        } else {
+          return Text(
+            "${state.data.firstNoSign}${state.data.first} ${state.data.operator} ${state.data.second}",
+            style: Theme.of(context).textTheme.titleSmall,
+          );
+        }
+      },
     );
   }
 }
