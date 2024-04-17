@@ -1,0 +1,2 @@
+json_key_file("/Users/shegz/Documents/Google cloud/Smart calculator/deploy_creds.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.jupyter.smartcalculator") # e.g. com.krausefx.app
