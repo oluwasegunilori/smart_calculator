@@ -34,7 +34,7 @@ class CalculatorScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  flex: 5,
+                  flex: 7,
                   child: Container(
                     child: GridView.builder(
                       shrinkWrap: true,
@@ -48,7 +48,7 @@ class CalculatorScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           decoration: BoxDecoration(
-                            color: Colors.purple.shade300,
+                            color: Colors.lightGreen,
                             borderRadius: BorderRadius.circular(
                                 10), // Adjust the radius as needed
                           ),
